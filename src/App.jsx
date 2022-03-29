@@ -17,12 +17,35 @@ import './App.css';
  */
 
 function App() {
-  // Implementation
+  const [tick, setTick] = React.useState(0);
+  const [isActive, setIsActive] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (isActive) {
+        if (tick !== 7) {
+          setTick(tick + 1);
+        } else {
+          setTick(0);
+        }
+      }
+    }, 1000);
+  }, [tick, isActive]);
   
   return (
     <div className="App">
       <h1>React Exercise</h1>
       <h2>Ticker</h2>
+      <p>{tick}</p>
+      <div>
+        <button onClick={() => setIsActive(false)} disabled={!isActive}>
+          Pause
+        </button>
+        &nbsp;
+        <button onClick={() => setIsActive(true)} disabled={isActive}>
+          Continue
+        </button>
+      </div>
     </div>
   );
 }
