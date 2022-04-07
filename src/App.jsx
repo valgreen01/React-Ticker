@@ -21,7 +21,7 @@ function App() {
   const [isActive, setIsActive] = React.useState(true);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const timeCounter = setTimeout(() => {
       if (isActive) {
         if (tick !== 7) {
           setTick(tick + 1);
@@ -30,6 +30,8 @@ function App() {
         }
       }
     }, 1000);
+
+    return () => clearTimeout(timeCounter);
   }, [tick, isActive]);
   
   return (
